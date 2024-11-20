@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= game.name 
+  p Released: #{game.released} 
+  p Rating: #{game.rating} 
+  p Platforms: 
+  ul 
+    each platform in game.platforms 
+      li= platform.platform.name 
+  p Description: 
+  p= game.description
+
+  h2 Deals 
+  if deals 
+    ul 
+      each deal in deals
+        li 
+          h3= deal.title
+          p Store: #{deal.storeName} 
+          p Sale Price: $#{deal.salePrice} 
+          p Normal Price: $#{deal.normalPrice} 
+          p Savings: #{Math.round(deal.savings)}%
+          a(href=`https://www.cheapshark.com/redirect?dealID=${deal.dealID}` target="_blank") View Deal
+  else 
+    p No deals available for this game.
