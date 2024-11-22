@@ -1,9 +1,19 @@
 extends layout 
 
 block content 
-    h2 Your Game Library 
-    ul
-        li Game 1
-        li Game 2
-        li Game 3
-    a(href="/library/game") View Game Details 
+    header 
+        h2 Library
+        p Explore your favourite games 
+    main.container 
+        .game-grid
+          each game in games
+            .game-card 
+              a(href=`/library/game/${game.id}`)
+                if game.imageUrl 
+                  img(src=game.imageUrl alt=`Cover image for ${game.name}` width="200" height="300")
+                else 
+                  div.no-cover-message No cover image found 
+            div.game-details
+              h2.game-title= game.name
+              p.release-date= `Release Date: ${game.released || 'Unknown'}`
+

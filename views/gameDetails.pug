@@ -1,26 +1,52 @@
 extends layout
 
 block content
-  h1= game.name 
-  p Released: #{game.released} 
-  p Rating: #{game.rating} 
-  p Platforms: 
-  ul 
-    each platform in game.platforms 
-      li= platform.platform.name 
-  p Description: 
-  p= game.description
+  .game-details-container
+    .overlay
+    .game-info 
+      h2.game-title= game.name 
+      p.release-date Release Date: #{game.released}
+      p.publisher Publishers: #{publishers}
+      
+      p.metascore Metascore:  #{game.metacritic ? game.metacritic : "Not available"}
+
+      p.genres Genres: 
+      ul.genres 
+        each genre in game.genres 
+          li= genre.name 
+
+      .esrb
+        .esrb-rating
+          p.esrb-title ESRB Rating:
+          if game.esrb_rating 
+            p= game.esrb_rating.name 
+          else 
+            p Not Rated 
+
+      p.description 
+        | Description: 
+        if game.description_raw 
+          p= game.description_raw.split('Español')[0].trim() 
+
+      p Platforms: 
+      .platforms-box 
+        each platform in game.platforms 
+          .platform-box
+            p= platform.platform.name 
+    
+    .game-box-art 
+      img(src=boxArtImageUrl, alt=game.name)
 
   h2 Deals 
-  if deals 
-    ul 
+  if deals
+    .deals-container 
       each deal in deals
-        li 
-          h3= deal.title
-          p Store: #{deal.storeName} 
-          p Sale Price: $#{deal.salePrice} 
-          p Normal Price: $#{deal.normalPrice} 
-          p Savings: #{Math.round(deal.savings)}%
-          a(href=`https://www.cheapshark.com/redirect?dealID=${deal.dealID}` target="_blank") View Deal
+        a(href=`https://www.cheapshark.com/redirect?dealID=${deal.dealID}` target="_blank" class="deal-link")
+          .deal-card 
+            img(src=`https://www.cheapshark.com/img/stores/logos/${deal.storeID}.png`, alt=deal.storeName)
+            h3 Sale Price: $#{deal.salePrice} 
+            h4 Normal Price: $#{deal.normalPrice} 
+            p Savings: #{Math.round(deal.savings)}%
+            //- a(href=`https://www.cheapshark.com/redirect?dealID=${deal.dealID}` target="_blank") View Deal
   else 
     p No deals available for this game.

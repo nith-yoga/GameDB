@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  h2 Search Results for "#{query}"
+
+  if results.length > 0
+    .results-container 
+      each game in results 
+        a.game-card(href=`/library/game/${game.id}`)
+          .game-card-content 
+            img.img(src=game.boxArtImageUrl, alt=game.name)
+            h3= game.name 
+            p Publishers: #{game.publishers}
+  else 
+    p No games found

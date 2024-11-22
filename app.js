@@ -10,8 +10,10 @@ app.use(helmet());
 
 app.use(helmet.contentSecurityPolicy({
     directives: {
-        defaultSrc: ["'self"],
-        scriptSrc: ["'self", "'unsafe-inline"],
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        imgSrc: ["'self'", "https://media.rawg.io/", "https://www.giantbomb.com", "https://www.cheapshark.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
     }
 }))
 
@@ -23,6 +25,9 @@ app.use(express.static(path.resolve('./public')));
 
 
 // Routes
+const searchRoute = require('./routes/searchRoute');
+app.use('/', searchRoute);
+
 const libraryRoutes = require('./routes/libraryRoute');
 app.use('/library', libraryRoutes);
 
@@ -37,3 +42,6 @@ app.get('/profile', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+  

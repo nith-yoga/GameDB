@@ -6,9 +6,13 @@ html
     body 
         header 
             h1 Game DB 
-            nav 
-                a(href="/") Home |
-                a(href="/library") Library |
-                a(href="/profile") Profile 
+            nav.navbar 
+                a.nav-item(href="/") Home
+                a.nav-item(href="/library") Library
+                a.nav-item(href="/profile") Profile
+                form.search-form(action="/search" method="GET")
+                  input(type="text" name="query" placeholder="Search for games..." required)
+                  button(type="submit") Search
+            
         main 
             block content 
