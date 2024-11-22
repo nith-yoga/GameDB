@@ -16,7 +16,7 @@ block content
         p No favorite games added yet.
 
     h3 Recently Played 
-    if Array.isArray(recentlyPlayed) && recentlyPlayed.length > 0 
+    if recentlyPlayed && recentlyPlayed.length > 0 
         ul 
             each game in recentlyPlayed 
                 li 
