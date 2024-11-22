@@ -33,6 +33,11 @@ block content
         each platform in game.platforms 
           .platform-box
             p= platform.platform.name 
+      
+      button(type="button", id="add-to-recently-played", data-game-id=game.id) Add to Recently Played
+      button(type="button", id="add-to-favorites", data-game-id=game.id) Add to Favorites
+
+
     
     .game-box-art 
       img(src=boxArtImageUrl, alt=game.name)
@@ -50,3 +55,7 @@ block content
             //- a(href=`https://www.cheapshark.com/redirect?dealID=${deal.dealID}` target="_blank") View Deal
   else 
     p No deals available for this game.
+  
+  a(href="/library") Back to Library
+
+  script(src="/js/details.js")

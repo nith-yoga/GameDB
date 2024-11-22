@@ -5,7 +5,7 @@ html
         link(rel="stylesheet", href="/css/styles.css")
     body 
         header 
-            h1 Game DB 
+            h1 Gamer DB 
             nav.navbar 
                 a.nav-item(href="/") Home
                 a.nav-item(href="/library") Library
@@ -13,6 +13,10 @@ html
                 form.search-form(action="/search" method="GET")
                   input(type="text" name="query" placeholder="Search for games..." required)
                   button(type="submit") Search
+                if user 
+                    a.nav-item(href="/logout") Logout 
+                else 
+                    a.nav-item(href="/login") Login
             
         main 
             block content 

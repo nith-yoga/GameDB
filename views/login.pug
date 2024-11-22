@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h2 Login
+    form(action="/api/auth/login", method="POST")
+      div
+        label(for="username") Username: 
+        input(type="text", id="username", name="username", required)
+      div
+        label(for="password") Password: 
+        input(type="password", id="password", name="password", required)
+      div
+        button(type="submit") Login 
+    div
+    p Don't have an account?
+    a(href="/register") Create an account!

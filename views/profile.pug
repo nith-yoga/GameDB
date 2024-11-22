@@ -3,7 +3,32 @@ extends layout
 block content 
     h2 Your Profile 
     p Manage your account and personal collection here.
-    ul 
-        li Favourite Games 
-        li Recently Played 
+
+    h3 Favorite Games 
+    if favoriteGames && favoriteGames.length > 0
+        ul 
+            each game in favoriteGames
+                li 
+                    strong  game.title
+                    |   (#{game.status})
+                    button(onclick=`removeGame('${game.gameId}')`) Remove
+    else 
+        p No favorite games added yet.
+
+    h3 Recently Played 
+    if Array.isArray(recentlyPlayed) && recentlyPlayed.length > 0 
+        ul 
+            each game in recentlyPlayed 
+                li 
+                    img(src=game.boxArtUrl, alt=game.gameName)
+                    span= game.gameName
+                    form(action="/users/profile/#{user._id}/remove", method="POST")
+                        input(type="hidden", name="gameId", value=game.gameId)
+                        input(type="hidden", name="collectionType", value="recentlyPlayed")
+                        button(type="submit") Remove
+    else 
+        p No games recently played yet.
+
     a(href="/library") Browse Library 
+
+    script(src="/js/profile.js")

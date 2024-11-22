@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
         const response = await axios.get(`https://api.rawg.io/api/games`, {
             params: {
                 key: process.env.RAWGAPI_KEY,
-                dates: '1900-01-01,2004-12-31',
                 page_size: 20
             }
         });
@@ -87,8 +86,7 @@ router.get('/game/:gameId', async (req, res) => {
             params: { 
                 title: gameData.name,
                 onSale: 1,
-                exact: 1,
-                sortBy: 'Store'
+                sortBy: 'Savings'
             },
         });
 
